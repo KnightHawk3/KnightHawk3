@@ -1,0 +1,20 @@
+---
+layout: post
+title: "PGP Key"
+date: 2013-02-03 10:46
+comments: true
+categories: 
+---
+
+
+I have started using PGP (My setup is GPG over commandline.) I now sign all my emails and occasionaly encrypt them.
+```
+GPG Key ID: 0xC2533566
+GPG Fingerprint: 79B6 F781 6854 15B6 153B  88CE 68E1 7E92 C253 3566
+```
+<!-- more -->
+If you want to quicky receive my keys this should work:
+``` bash
+gpg --keyserver pgp.mit.edu --recv-key 0xC2533566
+```
+ 
