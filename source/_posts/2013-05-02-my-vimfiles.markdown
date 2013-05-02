@@ -6,9 +6,9 @@ comments: true
 categories: Vim, Linux, Unix
 ---
 
-I put a good amount of work into my Vim configuration, here is some documentation for it.
+I put a good amount of work into my Vim configuration, here is some documentation and a rundown for it.
 
-```
+```vimL
 """""
 " KnightHawk3's vimrc Knight Hawk3 (KnightHawk3.com)
 
@@ -21,7 +21,7 @@ call pathogen#helptags()
 So this will open all the plugins in $VIMHOME/bundle/ and use them, this saves your vimfiles from being a convoluted mess, it then appends the help files, since I always forget to run helptags manually.
 
 
-```
+```vimL
 """
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -30,7 +30,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 The first is a mapping that allows me to press ```ctrl-n``` to open a NERDTree menu, it also closes it if it is open, the next line closes Vim if NERDTree is the last window open.
 
-```
+```vimL
 """
 " Filetypes
 filetype on
@@ -39,7 +39,7 @@ filetype plugin indent on
 
 This enables automatic filetype detection, pretty standard
 
-```
+```vimL
 """
 " Autocompletion
 au FileType python set omnifunc=pythoncomplete#Complete
@@ -49,7 +49,7 @@ set completeopt=menuone,longest,preview
 
 These are some autocompletion options, allowing me to use tab complete in python and pretty much everything.
 
-```
+```vimL
 """
 " Settings
 set nocompatible " Oh my god yes.
@@ -59,7 +59,7 @@ set number	 " Line numbers
 
 Sets nocompatible, you should have that already. Then my scrolloff, so that if my cursor is 5 lines from the top or bottom the window will start scrolling, this stops me from going to the bottom line. Finally it turns on line numbers
 
-```
+```vimL
 " Seaching settings
 set ignorecase	 " Ignores case in searching
 set showmatch	 " Highlight matches
@@ -75,7 +75,7 @@ set laststatus=2 " For Powerline
 
 Some settings that set various things, should be rather self explanatory.
 
-```
+```vimL
 """
 " Mappings
 "
@@ -103,14 +103,14 @@ I then go on to set some cool bindings such as:
 * There are then some bindings for Fuzzy finder
 
 
-```
+```vimL
 " Tagbar on ,tb
 nmap <leader>tb :TagbarToggle<CR>
 ```
 
 This toggles tagbar on ```,tb```
 
-```
+```vimL
 " Tasklist on \td
 map <leader>td <Plug>TaskList
 " Hitting & on a word allows me to substitute that word in the current
@@ -120,19 +120,23 @@ map <leader>td <Plug>TaskList
 nnoremap & :'{,'}s/<c-r>=expand('<cword>')<cr>/
 ```
 
-* 
+This allows me to subsitute the word in a paragraph easily
 
-```
+```vimL
 " jk leaves insert mode
 inoremap jk <ESC>
 ```
 
-```
+I got sick of reaching for the escape key
+
+```vimL
 " Tasklist
 map <leader>td <Plug>TaskList
 ```
 
-```
+This scans the page for TODO and shows me them, quite nice; bound to ```,td```
+
+```vimL
 " Window movement
 map <c-j> <c-w>j
 map <c-k> <c-w>k
@@ -140,7 +144,9 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 ```
 
-```
+Some nice window movement, saves me one keystroke.
+
+```vimL
 """
 " GUI stuff
 
@@ -150,7 +156,9 @@ set guifont=Consolas\ for\ Powerline\ FixedD:h12
 set guioptions=egmrt
 ```
 
-```
+Sets my font to Consolas for powerline, encoding to UTF-8 and turns off some of the upper buttons
+
+```vimL
 " Theme
 set background=light
 let g:solarized_termtrans=1
@@ -160,3 +168,8 @@ let g:solarized_visibility="high"
 syntax on
 colorscheme solarized
 ```
+
+Sets my background to light, makes my terminal transparent, turns up readability, turns on syntax highlighting, and enables solarized!
+
+
+Thats all, you can find the vimfiles and my plugins in my [git repository on github](https://github.com/KnightHawk3/vimfiles).
