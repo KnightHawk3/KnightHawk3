@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Unix | Knight Hawk3]]></title>
+  <link href="http://KnightHawk3.github.com/KnightHawk3/blog/categories/unix/atom.xml" rel="self"/>
+  <link href="http://KnightHawk3.github.com/KnightHawk3/"/>
+  <updated>2013-05-12T21:53:23+10:00</updated>
+  <id>http://KnightHawk3.github.com/KnightHawk3/</id>
+  <author>
+    <name><![CDATA[Knight Hawk3]]></name>
+    <email><![CDATA[declan@KnightHawk3.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My vimfiles]]></title>
+    <link href="http://KnightHawk3.github.com/KnightHawk3/blog/2013/05/02/my-vimfiles/"/>
+    <updated>2013-05-02T07:23:00+10:00</updated>
+    <id>http://KnightHawk3.github.com/KnightHawk3/blog/2013/05/02/my-vimfiles</id>
+    <content type="html"><![CDATA[<p>I put a good amount of work into my Vim configuration, here is some documentation for it.</p>
+
+<p>```
+"""""
+" KnightHawk3's vimrc Knight Hawk3 (KnightHawk3.com)</p>
+
+<p>"""
+" Pathogen <em>cough cough</em>
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+```</p>
+
+<p>So this will open all the plugins in $VIMHOME/bundle/ and use them, this saves your vimfiles from being a convoluted mess, it then appends the help files, since I always forget to run helptags manually.</p>
+
+<p><code>
+"""
+" Nerdtree
+map &lt;C-n&gt; :NERDTreeToggle&lt;CR&gt;
+autocmd bufenter * if (winnr("$") == 1 &amp;&amp; exists("b:NERDTreeType") &amp;&amp; b:NERDTreeType == "primary") | q | endif " Close if its the last one
+</code></p>
+
+<p>The first is a mapping that allows me to press <code>ctrl-n</code> to open a NERDTree menu, it also closes it if it is open, the next line closes Vim if NERDTree is the last window open.</p>
+
+<p><code>
+"""
+" Filetypes
+filetype on
+filetype plugin indent on
+</code></p>
+
+<p>This enables automatic filetype detection, pretty standard</p>
+
+<p><code>
+"""
+" Autocompletion
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+</code></p>
+
+<p>These are some autocompletion options, allowing me to use tab complete in python and pretty much everything.</p>
+
+<p><code>
+"""
+" Settings
+set nocompatible " Oh my god yes.
+set scrolloff=5  " Basically, doesn't let your cursor get to the top of the screen
+set number   " Line numbers
+</code></p>
+
+<p>Sets nocompatible, you should have that already. Then my scrolloff, so that if my cursor is 5 lines from the top or bottom the window will start scrolling, this stops me from going to the bottom line. Finally it turns on line numbers</p>
+
+<p><code>
+" Seaching settings
+set ignorecase   " Ignores case in searching
+set showmatch    " Highlight matches
+" Indentation settings
+set tabstop=4    " 4 ts master race
+set shiftwidth=4 " For the love of god.
+set backspace=2  " Real backspacing
+set expandtab    " Tabs become spaces
+" Prettyness
+set showcmd      " Just so I can see
+set laststatus=2 " For Powerline
+</code></p>
+
+<p>Some settings that set various things, should be rather self explanatory.</p>
+
+<p>```
+"""
+" Mappings
+"
+let mapleader = ","</p>
+
+<p>" \mdhtml converts document to html5
+nmap <leader>mdhtml :%!pandoc -f markdown -t html5<cr>
+" \mddtex converts to latex
+nmap <leader>mdtex :%!pandoc -f markdown -t latex --template=default.latex<cr></p>
+
+<p>" \v opens my vimrc for editing
+map <leader>v :tabe ~/vimfiles/.vimrc<cr></p>
+
+<p>map <leader>fb :FufBuffer
+map <leader>ff :FufFile
+```</p>
+
+<p>This sets my mapleader to <code>,</code> so that I can have various bindings.</p>
+
+<p>I then go on to set some cool bindings such as:</p>
+
+<ul>
+<li><code>,mdhtml</code> this converts the current document from markdown to html5, using pandoc, pandoc must be installed.</li>
+<li><code>,mdtex</code> this converts the current document from markdown to tex, using pandoc again.</li>
+<li><code>,v</code>  this opens my <code>~/vimfiles/.vimrc</code> for editing, TODO: change this to be dynamic.</li>
+<li>There are then some bindings for Fuzzy finder</li>
+</ul>
+
+
+<p><code>
+" Tagbar on ,tb
+nmap &lt;leader&gt;tb :TagbarToggle&lt;CR&gt;
+</code></p>
+
+<p>This toggles tagbar on <code>,tb</code></p>
+
+<p><code>
+" Tasklist on \td
+map &lt;leader&gt;td &lt;Plug&gt;TaskList
+" Hitting &amp; on a word allows me to substitute that word in the current
+" paragraph with the smallest number of keypresses I could come up with.
+" Basically it puts the first part of a s/word/letter on the commmand line
+" waiting for me to type the replacement and hit &lt;CR&gt;
+nnoremap &amp; :'{,'}s/&lt;c-r&gt;=expand('&lt;cword&gt;')&lt;cr&gt;/
+</code></p>
+
+<ul>
+<li></li>
+</ul>
+
+
+<p><code>
+" jk leaves insert mode
+inoremap jk &lt;ESC&gt;
+</code></p>
+
+<p><code>
+" Tasklist
+map &lt;leader&gt;td &lt;Plug&gt;TaskList
+</code></p>
+
+<p><code>
+" Window movement
+map &lt;c-j&gt; &lt;c-w&gt;j
+map &lt;c-k&gt; &lt;c-w&gt;k
+map &lt;c-l&gt; &lt;c-w&gt;l
+map &lt;c-h&gt; &lt;c-w&gt;h
+</code></p>
+
+<p>```
+"""
+" GUI stuff</p>
+
+<p>"My font for the GUI, removing of some buttons, and UTF-8
+set encoding=utf-8
+set guifont=Consolas\ for\ Powerline\ FixedD:h12
+set guioptions=egmrt
+```</p>
+
+<p><code>
+" Theme
+set background=light
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+syntax on
+colorscheme solarized
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
